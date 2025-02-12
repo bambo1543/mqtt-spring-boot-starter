@@ -9,9 +9,9 @@
         <version>9</version>
     </parent>
 
-    <groupId>com.github.tocrhz</groupId>
+    <groupId>it.bambo.mqtt</groupId>
     <artifactId>mqtt-spring-boot-starter</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2-SNAPSHOT</version>
     <name>mqtt-spring-boot-starter</name>
     <description>MQTT starter for Spring Boot, easier to use.</description>
 
