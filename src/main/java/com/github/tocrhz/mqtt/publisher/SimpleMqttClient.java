@@ -54,6 +54,11 @@ public record SimpleMqttClient(String id, IMqttAsyncClient client, MqttConnectOp
 
                 @Override
                 public void connectComplete(boolean reconnect, String serverURI) {
+                    try {
+                        client.publish(options.getWillDestination(), "running".getBytes(), options.getWillMessage().getQos(), options.getWillMessage().isRetained());
+                    } catch (MqttException e) {
+                        log.error(e.getMessage(), e);
+                    }
                     if (reconnect) {
                         log.info("mqtt reconnection success.");
                         subscribe();
