@@ -39,6 +39,11 @@ public record SimpleMqttClient(String id, IMqttAsyncClient client, MqttConnectOp
             client.connect(options, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
+                    try {
+                        client.publish(options.getWillDestination(), "running".getBytes(), options.getWillMessage().getQos(), options.getWillMessage().isRetained());
+                    } catch (MqttException e) {
+                        log.error(e.getMessage(), e);
+                    }
                     log.info("connect success. client_id is [{}], brokers is [{}].", id, String.join(",", options.getServerURIs()));
                     subscribe();
                 }
